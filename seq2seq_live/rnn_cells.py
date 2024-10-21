@@ -13,14 +13,14 @@ class RNNCellManual(nn.Module):
         """
         Args:
             x_t: batch_size, input_dim 
-            h_t: hidden_dim
+            h_t: batch_size, hidden_dim 
         Returns:
             h_t: batch_size, hidden_dim 
         """
         batch_size = x_t.size(0) 
         assert x_t.size(1) == self.input_dim, f'Input dimension was expected to be {self.input_dim}, got {x_t.size(1)}'
         assert h_t.size(0) == batch_size, f'0th dimension of h_t is expected to be {batch_size}, got {h_t.size(0)}'
-        assert h_t.size(1) == self.hidden_dim, f'Hidden dimension was expected to be {self.hidden_dim}, got {h_t.size(1)}'
+        assert h_t.size(1) == self.hidden_dim, f'Hidden dimension was expected to be {self.hidden_dim}, got {h_t.size(1)}' 
         
         h_t = torch.tanh(self.i2h(x_t) + self.h2h(h_t))
 
@@ -94,5 +94,5 @@ class LSTMCellManual(nn.Module):
         return h_t, c_t 
 
     def initialize(self, batch_size):
-        return torch.zeros(batch_size, self.hidden_dim), torch.zeros(batch_size, self.hidden_dim)
+        return torch.zeros(batch_size, self.hidden_dim), torch.zeros(batch_size, hidden_dim)
 
